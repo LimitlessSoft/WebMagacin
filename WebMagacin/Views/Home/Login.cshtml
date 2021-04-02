@@ -1,0 +1,66 @@
+﻿<style>
+    .Login {
+        max-width: 300px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90vw;
+    }
+
+    .Login input {
+        font-size: 1.4em;
+        border: 1px solid black;
+        margin: 5px;
+        padding: 10px;
+        width: calc(100% - 32px);
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .Login button {
+        width: calc(100% - 10px);
+        padding: 15px;
+        margin: 5px;
+        font-size: 18px;
+    }
+</style>
+
+<div class="Login">
+    <script>
+        function LogIn() {
+            var username = $(".username").val();
+            var password = $(".password").val();
+
+            $.ajax({
+                method: "POST",
+                url: "/User/Login",
+                data: {
+                    "username": username,
+                    "password": password
+                },
+                complete: function (data, status, xhttp) {
+                    var responseText = data.responseText;
+                    var responseCode = data.status;
+
+                    switch (responseCode) {
+                        case 200:
+                            alert("Uspesno ste ulogovani!");
+                            window.location.href = '/';
+                            break;
+                        case 400:
+                            alert(responseText);
+                            break;
+                        case 500:
+                            alert("Nepoznata greska");
+                            break;
+                    }
+                }
+            });
+        }
+    </script>
+
+    <input class="username" />
+    <input class="password" type="password" />
+    <button type="button" onclick="LogIn()">Loguj se</button>
+</div>

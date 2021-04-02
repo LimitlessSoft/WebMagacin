@@ -1,0 +1,22 @@
+﻿<h1>Glavni Meni</h1>
+
+<style>
+    div {
+        padding: 10px;
+    }
+</style>
+@{
+    List<LimitlessSoft.AspNet.Authorization.Client> loggedClients = LimitlessSoft.AspNet.Authorization.AuthorizationMiddleware.GetClients();
+    foreach(var c in loggedClients)
+    { 
+        <div>
+            @c.Identifier
+        </div>
+    }
+}
+<div>
+    <a href="/mmm">Authorized page</a>
+</div>
+<div>
+    <a href="/asd">Login page</a>
+</div>
